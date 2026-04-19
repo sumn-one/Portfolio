@@ -362,6 +362,12 @@ a {
     min-width: 0;
   }
 
+  .page-shell.page-about {
+    display: block;
+    width: auto;
+    min-width: 0;
+  }
+
   .works-main {
     display: block;
     margin-top: clamp(2rem, 10vw, 4rem);
@@ -389,6 +395,10 @@ a {
   .info-column {
     width: 100%;
     max-width: 100%;
+  }
+
+  .info-column {
+    min-width: 0;
   }
 
   .about-main .info-column {
