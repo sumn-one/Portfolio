@@ -6,7 +6,7 @@
     <title>SUMN Works</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
+  <body class="works-page-body">
     <div class="page-shell page-works">
       <header class="site-header" aria-label="Primary">
         <a class="brand" href="./index.html">sumn.one</a>
@@ -21,16 +21,79 @@
       </header>
 
       <main class="page-main works-main">
-        <section class="works-column" aria-label="Selected work">
-          <div class="cover-image-frame">
-            <img
-              class="cover-image"
-              src="./EFC5D76B-B2CB-438F-B558-83E4182DD6EB.JPG"
-              alt="A sticker-covered pole photographed against a textured wall"
-            />
-          </div>
+        <section class="works-list" aria-label="Selected works">
+          <a class="work-card work-card-interactive work-card-link" href="./cardit.html">
+            <div
+              class="work-card-media work-card-media-interactive"
+              data-cardit-root
+              data-active-zone="0"
+              tabindex="0"
+              aria-label="Project Cardit preview. Move across the image to switch between three views."
+            >
+              <img
+                class="work-card-image"
+                src="./cardit1.png"
+                alt="Project Cardit preview"
+                data-cardit-image
+              />
+            </div>
+            <p class="work-card-label">Project Cardit (2026)</p>
+          </a>
+
+          <article class="work-card work-card-placeholder">
+            <div class="work-card-media work-card-media-placeholder" aria-hidden="true"></div>
+            <p class="work-card-label">None</p>
+          </article>
         </section>
       </main>
     </div>
+
+    <script>
+      (() => {
+        const previewRoot = document.querySelector("[data-cardit-root]");
+        const previewImage = document.querySelector("[data-cardit-image]");
+        if (!previewRoot || !previewImage) return;
+
+        const sources = ["./cardit1.png", "./cardit2.png", "./cardit3.png"];
+        let activeZone = 0;
+
+        const setZone = (zone) => {
+          if (zone === activeZone) return;
+          activeZone = zone;
+          previewRoot.dataset.activeZone = String(zone);
+          previewImage.src = sources[zone];
+        };
+
+        const getZoneFromPointer = (event) => {
+          const bounds = previewRoot.getBoundingClientRect();
+          const ratio = (event.clientX - bounds.left) / bounds.width;
+          return Math.min(2, Math.max(0, Math.floor(ratio * 3)));
+        };
+
+        previewRoot.addEventListener("pointermove", (event) => {
+          setZone(getZoneFromPointer(event));
+        });
+
+        previewRoot.addEventListener("pointerleave", () => {
+          setZone(0);
+        });
+
+        previewRoot.addEventListener("focus", () => {
+          setZone(0);
+        });
+
+        previewRoot.addEventListener("keydown", (event) => {
+          if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            setZone(Math.max(0, activeZone - 1));
+          }
+
+          if (event.key === "ArrowRight") {
+            event.preventDefault();
+            setZone(Math.min(2, activeZone + 1));
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

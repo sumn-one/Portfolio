@@ -1,15 +1,21 @@
 :root {
   --page-bg: #f6f6f6;
   --page-text: #0e0e0e;
-  --page-scale: 0.88;
+  --page-scale: 0.9;
+  --edge-padding-scale: 0.75;
   --header-size: calc(clamp(1.15rem, 1.2rem + 0.7vw, 1.65rem) * var(--page-scale));
   --body-size: calc(clamp(1rem, 0.9rem + 0.45vw, 1.35rem) * var(--page-scale));
   --works-column-width: calc(37.8rem * var(--page-scale));
-  --content-gap: calc(clamp(2.75rem, 3vw, 3.6rem) * var(--page-scale));
-  --page-padding-x: calc(clamp(1.25rem, 3.9vw, 3.75rem) * var(--page-scale));
-  --page-padding-top: calc(clamp(1rem, 2vw, 3rem) * var(--page-scale));
-  --page-padding-bottom: calc(clamp(4rem, 9vw, 8rem) * var(--page-scale));
-  --main-offset: calc(clamp(2rem, 6vw, 6rem) * var(--page-scale));
+  --work-card-width: calc(clamp(20rem, 41vw, 52rem) * var(--page-scale));
+  --work-card-gap: calc(2.0625rem * var(--page-scale) * 0.5);
+  --work-card-caption-gap: calc(1.3125rem * var(--page-scale));
+  --work-card-caption-size: calc(clamp(0.95rem, 1rem + 0.6vw, 1.3rem) * var(--page-scale));
+  --cardit-gallery-gap: calc(clamp(1.8rem, 2.1vw, 2.15rem) * var(--page-scale));
+  --content-gap: calc(clamp(3.25rem, 4.25vw, 3.8rem) * var(--page-scale));
+  --page-padding-x: calc(clamp(1.25rem, 3.9vw, 3.75rem) * var(--page-scale) * var(--edge-padding-scale));
+  --page-padding-top: calc(clamp(1rem, 2vw, 3rem) * var(--page-scale) * var(--edge-padding-scale));
+  --page-padding-bottom: calc(clamp(4rem, 9vw, 8rem) * var(--page-scale) * var(--edge-padding-scale));
+  --main-offset: calc(clamp(2rem, 4vw, 6rem) * var(--page-scale));
   --nav-gap: calc(clamp(1.5rem, 2.75vw, 4rem) * var(--page-scale));
   --nav-offset: calc(clamp(4rem, 10vw, 10rem) * var(--page-scale));
   --section-gap: calc(clamp(2.75rem, 4vw, 3.5rem) * var(--page-scale));
@@ -41,6 +47,18 @@ body {
   width: max-content;
 }
 
+body.works-page-body {
+  width: auto;
+  min-width: 100%;
+  overflow-x: hidden;
+}
+
+body.cardit-page-body {
+  width: auto;
+  min-width: 100%;
+  overflow-x: hidden;
+}
+
 a {
   color: inherit;
 }
@@ -48,6 +66,22 @@ a {
 .page-shell {
   display: inline-block;
   padding: var(--page-padding-top) var(--page-padding-x) var(--page-padding-bottom);
+}
+
+.page-shell.page-works {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 100%;
+  align-items: stretch;
+}
+
+.page-shell.page-cardit {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 100%;
+  align-items: stretch;
 }
 
 .site-header {
@@ -102,7 +136,7 @@ a {
   height: 0.2em;
   border-radius: 999px;
   background: currentColor;
-  transform: translateY(0.1em);
+  transform: translateY(0.08em);
 }
 
 .contact-link {
@@ -115,6 +149,117 @@ a {
 .page-main {
   width: max-content;
   margin-top: var(--main-offset);
+}
+
+.page-shell.page-works .page-main {
+  width: 100%;
+  max-width: none;
+}
+
+.page-shell.page-cardit .page-main {
+  width: 100%;
+  max-width: none;
+}
+
+.works-main {
+  display: flex;
+  flex: 1 1 auto;
+  width: 100%;
+  margin-top: var(--main-offset);
+}
+
+.cardit-main {
+  width: 100%;
+  margin-top: var(--main-offset);
+}
+
+.works-list {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: start;
+  gap: var(--work-card-gap);
+  width: 100%;
+}
+
+.work-card {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.work-card-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.work-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1328 / 799;
+  overflow: hidden;
+}
+
+.work-card-media-placeholder {
+  background: transparent;
+}
+
+.work-card-media-interactive {
+  cursor: ew-resize;
+  outline: none;
+}
+
+.work-card-media-interactive::before,
+.work-card-media-interactive::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+}
+
+.work-card-media-interactive::before {
+  left: 33.3333%;
+}
+
+.work-card-media-interactive::after {
+  left: 66.6666%;
+}
+
+.work-card-media-interactive:focus-visible {
+  box-shadow: 0 0 0 2px #111;
+}
+
+.work-card-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.work-card-label {
+  margin: var(--work-card-caption-gap) 0 0;
+  font-size: var(--work-card-caption-size);
+  letter-spacing: -0.08em;
+  line-height: 0.78;
+}
+
+.cardit-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cardit-gallery-gap);
+  width: 100%;
+}
+
+.cardit-frame {
+  margin: 0;
+  width: 100%;
+}
+
+.cardit-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .works-layout {
@@ -206,11 +351,39 @@ a {
     margin-top: clamp(2rem, 10vw, 4rem);
   }
 
+  .page-shell.page-works {
+    display: inline-block;
+    width: auto;
+  }
+
+  .page-shell.page-cardit {
+    display: inline-block;
+    width: auto;
+    min-width: 0;
+  }
+
+  .works-main {
+    display: block;
+    margin-top: clamp(2rem, 10vw, 4rem);
+  }
+
+  .cardit-main {
+    margin-top: clamp(2rem, 10vw, 4rem);
+  }
+
+  .works-list {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2rem, 8vw, 3rem);
+    width: auto;
+  }
+
   .cover-layout {
     grid-template-columns: 1fr;
     row-gap: clamp(2rem, 8vw, 3rem);
   }
 
+  .work-card,
   .works-column,
   .image-column,
   .info-column {
