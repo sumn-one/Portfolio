@@ -262,6 +262,12 @@ a {
   height: auto;
 }
 
+.cardit-frame video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .works-layout {
   display: block;
 }
@@ -382,6 +388,10 @@ a {
     flex-direction: column;
     gap: clamp(2rem, 8vw, 3rem);
     width: auto;
+  }
+
+  .cardit-gallery {
+    gap: calc(var(--cardit-gallery-gap) * 0.3);
   }
 
   .cover-layout {
