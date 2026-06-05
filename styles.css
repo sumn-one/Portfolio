@@ -173,6 +173,16 @@ a {
   margin-top: var(--main-offset);
 }
 
+.cardit-project-link {
+  display: inline-block;
+  margin: 0 0 var(--cardit-gallery-gap);
+  font-size: var(--work-card-caption-size);
+  letter-spacing: -0.08em;
+  line-height: 0.78;
+  text-decoration-thickness: 0.04em;
+  text-underline-offset: 0.08em;
+}
+
 .works-list {
   display: flex;
   flex: 1 1 auto;
