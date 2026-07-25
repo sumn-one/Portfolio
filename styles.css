@@ -322,6 +322,14 @@ a {
   margin-top: 0.15rem;
 }
 
+.clients-title {
+  margin-bottom: 0.95rem;
+}
+
+.client-entry + .client-entry {
+  margin-top: 0.95rem;
+}
+
 .info-block a {
   text-decoration-thickness: 0.04em;
   text-underline-offset: 0.08em;
